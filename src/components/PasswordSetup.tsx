@@ -33,17 +33,23 @@ const PasswordSetup = React.memo(() => {
 
   return (
     <div>
-      <h2>Setup password</h2>
-      <PasswordInput
-        label="Password"
-        value={password}
-        onChange={onPasswordChange}
-      />
-      <PasswordInput
-        label="Confirm password"
-        value={confirmPassword}
-        onChange={onConfirmPasswordChange}
-      />
+      <p className="text-xl mb-4">
+        You are a new user. Please setup your wallet password
+      </p>
+      <div className="mb-3">
+        <PasswordInput
+          label="Password"
+          value={password}
+          onChange={onPasswordChange}
+        />
+      </div>
+      <div className="mb-6">
+        <PasswordInput
+          label="Confirm password"
+          value={confirmPassword}
+          onChange={onConfirmPasswordChange}
+        />
+      </div>
       <Button onClick={onSubmit} text="Submit" />
     </div>
   );

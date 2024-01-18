@@ -43,20 +43,26 @@ const Dashboard = React.memo(() => {
 
   return (
     <div>
-      {activeAddress ? (
-        <>
-          <div>Current active wallet: {activeAddress}</div>
-          {wagmiConfig.chains.map((chain) => (
-            <NativeBalance key={chain.id} chain={chain} />
-          ))}
-          <div>
-            <PrivateKeyDisplay key={activeAddress} />
-          </div>
-        </>
-      ) : (
-        <div>No wallet yet</div>
-      )}
-      <AddWalletButton />
+      <div className="mb-5">
+        {activeAddress ? (
+          <>
+            <div>Current active wallet: {activeAddress}</div>
+            {wagmiConfig.chains.map((chain) => (
+              <NativeBalance key={chain.id} chain={chain} />
+            ))}
+            <div className="mt-5">
+              <PrivateKeyDisplay key={activeAddress} />
+            </div>
+          </>
+        ) : (
+          <div>No wallet yet</div>
+        )}
+      </div>
+
+      <div className="mb-5">
+        <AddWalletButton />
+      </div>
+
       <WalletList />
     </div>
   );
