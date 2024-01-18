@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { useBalance } from 'wagmi';
+import { Chain, formatUnits } from 'viem';
 
 import { useAppSelector } from '../store/hooks';
 import { selectActiveAddress } from '../store/features/wallet/walletSelectors';
-import { Chain, formatUnits } from 'viem';
 
 interface NativeBalanceProps {
   chain: Chain;

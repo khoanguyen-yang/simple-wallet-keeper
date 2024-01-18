@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import PasswordInput from './PasswordInput';
+import Button from './base/Button';
 
 import { useAppDispatch } from '../store/hooks';
 import { finishPasswordSetup } from '../store/features/app/appSlice';
@@ -21,14 +22,14 @@ const PasswordSetup = React.memo(() => {
     setConfirmPassword(value);
   }, []);
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     if (password === confirmPassword) {
-      walletController.updateWalletPassword(password);
+      walletController.setPassword(password);
       dispatch(finishPasswordSetup());
     } else {
       toast.error('Passwords do not match');
     }
-  };
+  }, [password, confirmPassword, dispatch]);
 
   return (
     <div>
@@ -43,12 +44,7 @@ const PasswordSetup = React.memo(() => {
         value={confirmPassword}
         onChange={onConfirmPasswordChange}
       />
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={onSubmit}
-      >
-        Submit
-      </button>
+      <Button onClick={onSubmit} text="Submit" />
     </div>
   );
 });

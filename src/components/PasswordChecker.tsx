@@ -2,14 +2,14 @@ import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import PasswordInput from './PasswordInput';
-
 import Button from './base/Button';
+
 import { walletController } from '../features/WalletController';
 
 interface PasswordCheckerProps {
-  type?: 'login' | 'check_only';
   onPasswordCheckSuccess: () => void;
   buttonText: string;
+  type?: 'login' | 'check_only';
 }
 
 const PasswordChecker = React.memo((props: PasswordCheckerProps) => {
@@ -21,7 +21,7 @@ const PasswordChecker = React.memo((props: PasswordCheckerProps) => {
     setPassword(value);
   }, []);
 
-  const onLogin = () => {
+  const onLogin = useCallback(() => {
     if (
       walletController.checkPassword(password, {
         overridePassword: type === 'login',
@@ -31,7 +31,7 @@ const PasswordChecker = React.memo((props: PasswordCheckerProps) => {
     } else {
       toast.error('Incorrect password');
     }
-  };
+  }, [password, type, onPasswordCheckSuccess]);
 
   return (
     <div>

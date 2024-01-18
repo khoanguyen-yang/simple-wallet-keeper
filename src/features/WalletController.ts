@@ -13,13 +13,32 @@ let walletController: WalletController;
 class WalletController {
   private address2PrivateKey: Address2PrivateKey = {};
   private encryptedWalletData: string;
-  private walletPassword: string = '';
+  private password: string = '';
 
   constructor() {
     this.encryptedWalletData = localStorage.getEncryptedWalletData();
   }
 
-  tryDecryptWalletData(password: string): boolean {
+  /**
+   * Encrypt wallet data using wallet password
+   */
+  private encryptWalletData() {
+    const encrypted = encrypt(
+      JSON.stringify(this.address2PrivateKey),
+      this.password
+    );
+
+    this.encryptedWalletData = encrypted;
+    localStorage.storeEncryptedWalletData(encrypted);
+
+    return encrypted;
+  }
+
+  /**
+   * Try decrypting the encrypted wallet using the provided password
+   * Cache the decrypted data locally if decryption succeeds
+   */
+  private tryDecryptWalletData(password: string): boolean {
     try {
       if (!this.encryptedWalletData) {
         return false;
@@ -36,10 +55,18 @@ class WalletController {
     }
   }
 
-  updateWalletPassword(password: string) {
-    this.walletPassword = password;
+  /**
+   * Set new password for the wallet
+   * And thus the encrypted wallet data must be encrypted with the new password
+   */
+  setPassword(password: string) {
+    this.password = password;
+    this.encryptWalletData();
   }
 
+  /**
+   * Check if a password is valid or not by trying to decrypt the wallet data
+   */
   checkPassword(
     password: string,
     options?: { overridePassword?: boolean }
@@ -47,21 +74,10 @@ class WalletController {
     const isDecryptSucessful = this.tryDecryptWalletData(password);
 
     if (isDecryptSucessful && options?.overridePassword) {
-      this.updateWalletPassword(password);
+      this.setPassword(password);
     }
 
     return isDecryptSucessful;
-  }
-
-  encryptWalletData() {
-    const encrypted = encrypt(
-      JSON.stringify(this.address2PrivateKey),
-      this.walletPassword
-    );
-    this.encryptedWalletData = encrypted;
-    localStorage.storeEncryptedWalletData(encrypted);
-
-    return encrypted;
   }
 
   addWallet(wallet: Wallet) {
@@ -73,7 +89,7 @@ class WalletController {
     return this.address2PrivateKey[address] || '';
   }
 
-  public static init() {
+  static init() {
     if (!walletController) {
       walletController = new WalletController();
     }

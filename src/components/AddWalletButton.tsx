@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import Button from './base/Button';
 
@@ -9,10 +9,10 @@ import { addWallet } from '../store/features/wallet/walletSlice';
 const AddWalletButton = React.memo(() => {
   const dispatch = useAppDispatch();
 
-  const onAddWallet = () => {
+  const onAddWallet = useCallback(() => {
     const wallet = generateRandomWallet();
     dispatch(addWallet(wallet));
-  };
+  }, [dispatch]);
 
   return <Button onClick={onAddWallet} text="Add wallet" />;
 });

@@ -3,18 +3,18 @@ import React, { useCallback } from 'react';
 import PasswordSetup from '../components/PasswordSetup';
 import AddWalletButton from '../components/AddWalletButton';
 import WalletList from '../components/WalletList';
+import PasswordChecker from '../components/PasswordChecker';
+import PrivateKeyDisplay from '../components/PrivateKeyDisplay';
+import NativeBalance from '../components/NativeBalance';
 
 import {
   selectIsLoggedIn,
   selectHasPassword,
 } from '../store/features/app/appSelectorts';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import PasswordChecker from '../components/PasswordChecker';
 import { selectActiveAddress } from '../store/features/wallet/walletSelectors';
-import { wagmiConfig } from '../wagmiConfig';
-import NativeBalance from '../components/NativeBalance';
 import { loginSuccess } from '../store/features/app/appSlice';
-import PrivateKeyDisplay from '../components/PrivateKeyDisplay';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { wagmiConfig } from '../wagmiConfig';
 
 const Dashboard = React.memo(() => {
   const dispatch = useAppDispatch();
