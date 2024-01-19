@@ -24,7 +24,7 @@ const PasswordChecker = React.memo((props: PasswordCheckerProps) => {
   const onLogin = useCallback(() => {
     if (
       walletController.checkPassword(password, {
-        overridePassword: type === 'login',
+        setPassword: type === 'login',
       })
     ) {
       onPasswordCheckSuccess();

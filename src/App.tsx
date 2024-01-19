@@ -1,9 +1,11 @@
-import './App.css';
+import React from 'react';
 
 import Dashboard from './pages/Dashboard';
 
-function App() {
+import './App.css';
+
+const App = React.memo(() => {
   return <Dashboard />;
-}
+});
 
 export default App;

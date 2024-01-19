@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import Button from './base/Button';
 import PasswordChecker from './PasswordChecker';
@@ -23,13 +23,6 @@ const PrivateKeyDisplay = React.memo(() => {
     setDisplayState('show');
   }, []);
 
-  const privateKey = useMemo(() => {
-    if (displayState === 'show' && activeAddress) {
-      return walletController.getPrivateKeyOfAddress(activeAddress);
-    }
-    return '';
-  }, [displayState, activeAddress]);
-
   if (displayState === 'hidden') {
     return <Button text="Show private key" onClick={onShowPrivateKey} />;
   }
@@ -42,6 +35,11 @@ const PrivateKeyDisplay = React.memo(() => {
       />
     );
   }
+
+  const privateKey =
+    displayState === 'show' && activeAddress
+      ? walletController.getPrivateKeyOfAddress(activeAddress)
+      : '';
 
   return <div>Private key: {privateKey}</div>;
 });

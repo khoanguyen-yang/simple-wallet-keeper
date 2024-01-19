@@ -5,7 +5,7 @@ import NativeBalance from '../components/NativeBalance';
 
 import { useAppSelector } from '../store/hooks';
 import { selectActiveAddress } from '../store/features/wallet/walletSelectors';
-import { wagmiConfig } from '../wagmiConfig';
+import { wagmiConfig } from '../constants/wagmiConfig';
 
 const ActiveWalletDisplay = React.memo(() => {
   const activeAddress = useAppSelector(selectActiveAddress);

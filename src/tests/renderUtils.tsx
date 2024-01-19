@@ -9,7 +9,7 @@ import { WagmiProvider } from 'wagmi';
 import { ToastContainer } from 'react-toastify';
 
 import { rootReducer } from '../store/store';
-import { wagmiConfig } from '../wagmiConfig';
+import { wagmiConfig } from '../constants/wagmiConfig';
 import { listenerMiddleware } from '../store/middlewares/listeners';
 
 const queryClient = new QueryClient();

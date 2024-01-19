@@ -4,14 +4,15 @@ import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 import { ToastContainer } from 'react-toastify';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { persistor, store } from './store/store';
-import { wagmiConfig } from './wagmiConfig.ts';
+import { wagmiConfig } from './constants/wagmiConfig.ts';
 
 import App from './App.tsx';
+
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { PersistGate } from 'redux-persist/integration/react';
 
 const queryClient = new QueryClient();
 

@@ -69,11 +69,11 @@ class WalletController {
    */
   checkPassword(
     password: string,
-    options?: { overridePassword?: boolean }
+    options?: { setPassword?: boolean }
   ): boolean {
     const isDecryptSucessful = this.tryDecryptWalletData(password);
 
-    if (isDecryptSucessful && options?.overridePassword) {
+    if (isDecryptSucessful && options?.setPassword) {
       this.setPassword(password);
     }
 
