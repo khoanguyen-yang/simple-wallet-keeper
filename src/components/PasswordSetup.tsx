@@ -23,7 +23,9 @@ const PasswordSetup = React.memo(() => {
   }, []);
 
   const onSubmit = useCallback(() => {
-    if (password === confirmPassword) {
+    if (password === '' && confirmPassword === '') {
+      toast.info('You should input passwords');
+    } else if (password === confirmPassword) {
       walletController.setPassword(password);
       dispatch(finishPasswordSetup());
     } else {
@@ -38,16 +40,18 @@ const PasswordSetup = React.memo(() => {
       </p>
       <div className="mb-3">
         <PasswordInput
+          data-testid="password"
           label="Password"
           value={password}
-          onChange={onPasswordChange}
+          onValueChange={onPasswordChange}
         />
       </div>
       <div className="mb-6">
         <PasswordInput
+          data-testid="confirm-password"
           label="Confirm password"
           value={confirmPassword}
-          onChange={onConfirmPasswordChange}
+          onValueChange={onConfirmPasswordChange}
         />
       </div>
       <Button onClick={onSubmit} text="Submit" />

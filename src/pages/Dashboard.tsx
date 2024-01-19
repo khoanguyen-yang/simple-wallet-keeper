@@ -4,8 +4,7 @@ import PasswordSetup from '../components/PasswordSetup';
 import AddWalletButton from '../components/AddWalletButton';
 import WalletList from '../components/WalletList';
 import PasswordChecker from '../components/PasswordChecker';
-import PrivateKeyDisplay from '../components/PrivateKeyDisplay';
-import NativeBalance from '../components/NativeBalance';
+import ActiveWalletDisplay from '../components/ActiveWalletDisplay';
 
 import {
   selectIsLoggedIn,
@@ -14,7 +13,6 @@ import {
 import { selectActiveAddress } from '../store/features/wallet/walletSelectors';
 import { loginSuccess } from '../store/features/app/appSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { wagmiConfig } from '../wagmiConfig';
 
 const Dashboard = React.memo(() => {
   const dispatch = useAppDispatch();
@@ -44,19 +42,7 @@ const Dashboard = React.memo(() => {
   return (
     <div>
       <div className="mb-5">
-        {activeAddress ? (
-          <>
-            <div>Current active wallet: {activeAddress}</div>
-            {wagmiConfig.chains.map((chain) => (
-              <NativeBalance key={chain.id} chain={chain} />
-            ))}
-            <div className="mt-5">
-              <PrivateKeyDisplay key={activeAddress} />
-            </div>
-          </>
-        ) : (
-          <div>No wallet yet</div>
-        )}
+        {activeAddress ? <ActiveWalletDisplay /> : <div>No wallet yet</div>}
       </div>
 
       <div className="mb-5">

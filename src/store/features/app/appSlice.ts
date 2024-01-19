@@ -5,7 +5,7 @@ export interface AppState {
   loggedIn: boolean;
 }
 
-const initialState: AppState = {
+export const initialState: AppState = {
   hasPassword: false,
   loggedIn: false,
 };

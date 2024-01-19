@@ -1,8 +1,8 @@
 import { Address } from 'viem';
 
-import { PrivateKey, Wallet } from '../constants/types';
 import { decrypt, encrypt } from '../utils/crypto';
 import localStorage from '../utils/localStorage';
+import { PrivateKey, Wallet } from '../constants/types';
 
 interface Address2PrivateKey {
   [address: Address]: PrivateKey;

@@ -9,7 +9,7 @@ export interface WalletState {
   wallets: Address[];
 }
 
-const initialState: WalletState = {
+export const initialState: WalletState = {
   activeAddress: null,
   wallets: [],
 };

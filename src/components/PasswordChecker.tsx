@@ -37,9 +37,10 @@ const PasswordChecker = React.memo((props: PasswordCheckerProps) => {
     <div>
       <div className="mb-5">
         <PasswordInput
+          data-testid="password"
           label="Password"
           value={password}
-          onChange={onPasswordChange}
+          onValueChange={onPasswordChange}
         />
       </div>
       <Button onClick={onLogin} text={buttonText} />

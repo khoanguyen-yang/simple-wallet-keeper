@@ -29,7 +29,7 @@ const appPersistConfig = {
   blacklist: ['loggedIn'],
 };
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   app: persistReducer(appPersistConfig, app),
   wallet,
 });
