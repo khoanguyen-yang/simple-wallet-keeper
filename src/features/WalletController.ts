@@ -80,6 +80,14 @@ class WalletController {
     return isDecryptSucessful;
   }
 
+  /**
+   * When checking password during login, it is important to have setPassword option to be true
+   * This is because password needs to be cached locally for future data encryption
+   */
+  checkPasswordLogin(password: string) {
+    return this.checkPassword(password, { setPassword: true });
+  }
+
   addWallet(wallet: Wallet) {
     this.address2PrivateKey[wallet.address] = wallet.privateKey;
     this.encryptWalletData();

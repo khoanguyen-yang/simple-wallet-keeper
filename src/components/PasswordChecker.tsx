@@ -22,16 +22,17 @@ const PasswordChecker = React.memo((props: PasswordCheckerProps) => {
   }, []);
 
   const onLogin = useCallback(() => {
-    if (
-      walletController.checkPassword(password, {
-        setPassword: type === 'login',
-      })
-    ) {
+    const isValidPassword =
+      type === 'login'
+        ? walletController.checkPasswordLogin(password)
+        : walletController.checkPassword(password);
+
+    if (isValidPassword) {
       onPasswordCheckSuccess();
     } else {
       toast.error('Incorrect password');
     }
-  }, [password, type, onPasswordCheckSuccess]);
+  }, [type, password, onPasswordCheckSuccess]);
 
   return (
     <div>

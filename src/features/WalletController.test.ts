@@ -70,9 +70,19 @@ describe('WalletController', () => {
 
       test('able to hydrate with correct password', () => {
         // walletController.checkPassword is triggered for internal wallet hydration
-        walletController.checkPassword(WALLET_PASSWORD, {
-          overridePassword: true,
-        });
+        walletController.checkPassword(WALLET_PASSWORD);
+
+        expect(walletController.getPrivateKeyOfAddress(wallets[0].address)).eq(
+          wallets[0].privateKey
+        );
+        expect(walletController.getPrivateKeyOfAddress(wallets[1].address)).eq(
+          wallets[1].privateKey
+        );
+      });
+
+      test('able to hydrate with correct password during login', () => {
+        // walletController.checkPassword is triggered for internal wallet hydration
+        walletController.checkPasswordLogin(WALLET_PASSWORD);
 
         expect(walletController.getPrivateKeyOfAddress(wallets[0].address)).eq(
           wallets[0].privateKey
@@ -84,9 +94,7 @@ describe('WalletController', () => {
 
       test('not able to hydrate with incorrect password', () => {
         // walletController.checkPassword is triggered for internal wallet hydration
-        walletController.checkPassword(WRONG_WALLET_PASSWORD, {
-          overridePassword: true,
-        });
+        walletController.checkPassword(WRONG_WALLET_PASSWORD);
 
         expect(
           walletController.getPrivateKeyOfAddress(wallets[0].address)
